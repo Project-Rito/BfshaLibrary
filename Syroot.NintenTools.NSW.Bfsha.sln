@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Syroot.NintenTools.NSW.Bfsha", "Syroot.NintenTools.NSW.Bfsha.csproj", "{7A7F4DBC-4BD5-406B-9572-2CC9CA674273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syroot.NintenTools.NSW.Bfsha.Test", "..\Syroot.NintenTools.NSW.Bfsha.Test\Syroot.NintenTools.NSW.Bfsha.Test.csproj", "{C7B4DFAF-4625-4EC3-8758-30482A91E569}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A7F4DBC-4BD5-406B-9572-2CC9CA674273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A7F4DBC-4BD5-406B-9572-2CC9CA674273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A7F4DBC-4BD5-406B-9572-2CC9CA674273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A7F4DBC-4BD5-406B-9572-2CC9CA674273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7B4DFAF-4625-4EC3-8758-30482A91E569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B4DFAF-4625-4EC3-8758-30482A91E569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B4DFAF-4625-4EC3-8758-30482A91E569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B4DFAF-4625-4EC3-8758-30482A91E569}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

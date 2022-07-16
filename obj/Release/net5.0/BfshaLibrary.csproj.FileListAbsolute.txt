@@ -1,0 +1,14 @@
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\bin\Release\net5.0\BfshaLibrary.deps.json
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\bin\Release\net5.0\BfshaLibrary.dll
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\bin\Release\net5.0\BfshaLibrary.pdb
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\bin\Release\net5.0\BfshaLibrary.xml
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Release\net5.0\BfshaLibrary.csproj.AssemblyReference.cache
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Release\net5.0\BfshaLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Release\net5.0\BfshaLibrary.AssemblyInfoInputs.cache
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Release\net5.0\BfshaLibrary.AssemblyInfo.cs
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Release\net5.0\BfshaLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Release\net5.0\BfshaLibrary.dll
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Release\net5.0\refint\BfshaLibrary.dll
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Release\net5.0\BfshaLibrary.xml
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Release\net5.0\BfshaLibrary.pdb
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Release\net5.0\ref\BfshaLibrary.dll

@@ -1,0 +1,12 @@
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\bin\Debug\netstandard2.1\BfshaLibrary.deps.json
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\bin\Debug\netstandard2.1\BfshaLibrary.dll
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\bin\Debug\netstandard2.1\BfshaLibrary.pdb
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\bin\Debug\netstandard2.1\BfshaLibrary.xml
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Debug\netstandard2.1\BfshaLibrary.csproj.AssemblyReference.cache
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Debug\netstandard2.1\BfshaLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Debug\netstandard2.1\BfshaLibrary.AssemblyInfoInputs.cache
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Debug\netstandard2.1\BfshaLibrary.AssemblyInfo.cs
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Debug\netstandard2.1\BfshaLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Debug\netstandard2.1\BfshaLibrary.dll
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Debug\netstandard2.1\BfshaLibrary.xml
+C:\Users\Greenlord\Desktop\MapStudio-Binaries\nonconverted\Syroot.NintenTools.Bfsha\Syroot.NintenTools.Bfsha\obj\Debug\netstandard2.1\BfshaLibrary.pdb
