@@ -15,10 +15,10 @@ namespace BfshaLibrary.WiiU
             ushort staticOptionCount = loader.ReadUInt16();
             ushort dynamicOptionCount = loader.ReadUInt16();
             ushort programCount = loader.ReadUInt16();
-            byte attributeCount = loader.ReadByte();
-            byte samplerCount = loader.ReadByte();
-            byte uniformBlockCount = loader.ReadByte();
-            shaderModel.MaxRingItemSize = loader.ReadByte();
+            byte attributeCount = (byte)loader.ReadByte();
+            byte samplerCount = (byte)loader.ReadByte();
+            byte uniformBlockCount = (byte)loader.ReadByte();
+            shaderModel.MaxRingItemSize = (uint)loader.ReadByte();
             loader.ReadUInt16();
             loader.ReadUInt16();
             loader.ReadUInt32();

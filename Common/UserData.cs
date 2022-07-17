@@ -45,7 +45,7 @@ namespace BfshaLibrary
         {
             saver.SaveString(Name);
             saver.Write((ushort)((Array)_value).Length); // Unsafe cast, but _value should always be Array.
-            saver.Write(Type, true);
+            saver.WriteEnum(Type, true);
   
         }
     }

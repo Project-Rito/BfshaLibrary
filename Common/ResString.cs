@@ -66,7 +66,7 @@ namespace BfshaLibrary
 
         void IResData.Load(BfshaFileLoader loader)
         {
-            String = loader.ReadString(BinaryStringFormat.ZeroTerminated, Encoding ?? loader.Encoding);
+            String = loader.ReadString(StringCoding.ZeroTerminated, Encoding ?? loader.Encoding);
         }
 
         void IResData.Save(BfshaFileSaver saver)

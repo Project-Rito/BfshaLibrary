@@ -13,7 +13,7 @@ namespace BfshaLibrary.Core
     /// <summary>
     /// Saves the hierachy and data of a <see cref="Bfres.ResFile"/>.
     /// </summary>
-    public class BfshaFileSaver : BinaryDataWriter
+    public class BfshaFileSaver : BinaryStream
     {
         // ---- CONSTANTS ----------------------------------------------------------------------------------------------
 
@@ -33,16 +33,16 @@ namespace BfshaLibrary.Core
         // ---- CONSTRUCTORS & DESTRUCTOR ------------------------------------------------------------------------------
 
         internal BfshaFileSaver(BfshaFile resFile, Stream stream, bool leaveOpen)
-            : base(stream, Encoding.ASCII, leaveOpen)
+            : base(stream, null, null, BooleanCoding.Byte, DateTimeCoding.NetTicks, StringCoding.ZeroTerminated, leaveOpen)
         {
-            ByteOrder = ByteOrder.BigEndian;
+            ByteConverter = ByteConverter.Big;
             BfshaFile = resFile;
         }
 
         internal BfshaFileSaver(IResData resData, BfshaFile resFile, Stream stream, bool leaveOpen)
-    : base(stream, Encoding.ASCII, leaveOpen)
+    : base(stream, null, null, BooleanCoding.Byte, DateTimeCoding.NetTicks, StringCoding.ZeroTerminated, leaveOpen)
         {
-            ByteOrder = ByteOrder.BigEndian;
+            ByteConverter = ByteConverter.Big;
             ExportableData = resData;
             BfshaFile = resFile;
         }
@@ -80,7 +80,7 @@ namespace BfshaLibrary.Core
 
         internal void WriteHeader(string SubSection, string Magic, int Offset = 32)
         {
-            ByteOrder = ByteOrder.BigEndian;
+            ByteConverter = ByteConverter.Big;
 
             // Create queues fetching the names for the string pool and data blocks to store behind the headers.
             _savedItems = new List<ItemEntry>();
@@ -95,12 +95,12 @@ namespace BfshaLibrary.Core
             Write((int)(Offset - Position));
             Write(IsSwitch ? 1 : 0); //Detects platform. 0 = Wii U, 1 == Switch
             Write(0);
-            ByteOrder = ByteOrder.BigEndian;
+            ByteConverter = ByteConverter.Big;
 
             if (IsSwitch)
             {
                 Seek(0x30, SeekOrigin.Begin);
-                ByteOrder = ByteOrder.LittleEndian;
+                ByteConverter = ByteConverter.Little;
             }
         }
 
@@ -489,7 +489,9 @@ namespace BfshaLibrary.Core
                 }
 
                 // Write the name.
-                Write(entry.Key, BinaryStringFormat.ZeroTerminated, entry.Value.Encoding ?? Encoding);
+                StringCoding = StringCoding.ZeroTerminated;
+                Encoding = entry.Value.Encoding ?? Encoding;
+                Write(entry.Key);
                 Align(4);
             }
             BaseStream.SetLength(Position); // Workaround to make last alignment expand the file if nothing follows.
@@ -534,11 +536,11 @@ namespace BfshaLibrary.Core
             }
         }
 
-        internal void WriteByteOrder(ByteOrder byteOrder)
+        internal void WriteByteConverter(ByteConverter byteConverter)
         {
-            ByteOrder = ByteOrder.BigEndian;
-            Write(byteOrder, true);
-            ByteOrder = byteOrder;
+            ByteConverter = ByteConverter.Big;
+            WriteEnum(byteConverter.Endian, true);
+            ByteConverter = byteConverter;
         }
 
         public virtual void SatisfyOffsets(List<uint> offsets, uint target)

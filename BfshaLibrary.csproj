@@ -36,15 +36,7 @@
 	  <Folder Include="ShaderModels\ShaderOptions\" />
 	</ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Syroot.IO.BinaryData" Version="2.0.1" />
-    <PackageReference Include="Syroot.Maths" Version="1.5.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Syroot.BinaryData">
-      <HintPath>..\Syroot.NintenTools.Bfres\bin\Release\net45\Syroot.BinaryData.dll</HintPath>
-    </Reference>
-    <Reference Include="Syroot.Maths">
-      <HintPath>..\Syroot.NintenTools.Bfres\bin\Release\net45\Syroot.Maths.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Syroot.BinaryData" Version="5.2.2" />
+    <PackageReference Include="Syroot.Maths" Version="1.5.3" />
   </ItemGroup>
 </Project>

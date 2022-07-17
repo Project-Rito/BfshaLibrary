@@ -29,14 +29,14 @@ namespace BfshaLibrary.Switch.Core
         internal BfshaFileSwitchLoader(BfshaFile resFile, Stream stream, bool leaveOpen = false)
             : base(resFile, stream, leaveOpen)
         {
-            ByteOrder = ByteOrder.LittleEndian;
+            ByteConverter = ByteConverter.Little;
             IsSwitch = true;
         }
 
         internal BfshaFileSwitchLoader(IResData resData, BfshaFile resFile, Stream stream, bool leaveOpen = false)
     : base(resData, resFile, stream, leaveOpen)
         {
-            ByteOrder = ByteOrder.LittleEndian;
+            ByteConverter = ByteConverter.Little;
             IsSwitch = true;
         }
 
@@ -49,14 +49,14 @@ namespace BfshaLibrary.Switch.Core
         internal BfshaFileSwitchLoader(BfshaFile resFile, string fileName)
             : base(resFile, fileName)
         {
-            ByteOrder = ByteOrder.LittleEndian;
+            ByteConverter = ByteConverter.Little;
             IsSwitch = true;
         }
 
         internal BfshaFileSwitchLoader(IResData resData, BfshaFile resFile, string fileName)
             : base(resData, resFile, fileName)
         {
-            ByteOrder = ByteOrder.LittleEndian;
+            ByteConverter = ByteConverter.Little;
             IsSwitch = true;
         }
 
@@ -65,7 +65,7 @@ namespace BfshaLibrary.Switch.Core
         internal BfshaFileSwitchLoader(BnshFile resFile, Stream stream, bool leaveOpen)
 : base(null, stream, leaveOpen)
         {
-            ByteOrder = ByteOrder.LittleEndian;
+            ByteConverter = ByteConverter.Little;
             BnshFile = resFile;
             IsSwitch = true;
         }
@@ -73,7 +73,7 @@ namespace BfshaLibrary.Switch.Core
         internal BfshaFileSwitchLoader(BnshFile resFile, string fileName)
 : base(null, fileName)
         {
-            ByteOrder = ByteOrder.LittleEndian;
+            ByteConverter = ByteConverter.Little;
             BnshFile = resFile;
             IsSwitch = true;
         }
@@ -141,7 +141,10 @@ namespace BfshaLibrary.Switch.Core
         public override string ReadString(Encoding encoding = null)
         {
             short size = ReadInt16();
-            return ReadString(BinaryStringFormat.ZeroTerminated, encoding);
+            PushStringCoding(StringCoding.ZeroTerminated);
+            string output = ReadString(encoding);
+            PopStringCoding();
+            return output;
         }
     }
 }

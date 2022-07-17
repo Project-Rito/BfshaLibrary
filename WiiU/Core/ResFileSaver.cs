@@ -40,13 +40,13 @@ namespace BfshaLibrary.WiiU.Core
         internal BfshaFileWiiUSaver(BfshaFile resFile, Stream stream, bool leaveOpen)
     : base(resFile, stream, leaveOpen)
         {
-            ByteOrder = ByteOrder.BigEndian;
+            ByteConverter = ByteConverter.Big;
         }
 
         internal BfshaFileWiiUSaver(IResData resData, BfshaFile resFile, Stream stream, bool leaveOpen)
     : base(resData, resFile, stream, leaveOpen)
         {
-            ByteOrder = ByteOrder.BigEndian;
+            ByteConverter = ByteConverter.Big;
         }
 
         /// <summary>

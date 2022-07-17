@@ -16,8 +16,8 @@ namespace BfshaLibrary.WiiU
             else
             {
                 loader.ReadUInt16();
-                byte samplerCount = loader.ReadByte();
-                byte blockCount = loader.ReadByte();
+                byte samplerCount = (byte)loader.ReadByte();
+                byte blockCount = (byte)loader.ReadByte();
                 shaderProgram.UsedAttributeFlags = loader.ReadUInt32();
                 loader.Seek(24);
                 shaderProgram.SamplerLocations = loader.LoadList<LocationInfo>(samplerCount).ToArray();

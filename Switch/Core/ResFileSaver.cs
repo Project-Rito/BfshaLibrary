@@ -40,13 +40,13 @@ namespace BfshaLibrary.Switch.Core
         internal BfshaFileSwitchSaver(BfshaFile resFile, Stream stream, bool leaveOpen)
     : base(resFile, stream, leaveOpen)
         {
-            ByteOrder = ByteOrder.LittleEndian;
+            ByteConverter = ByteConverter.Little;
         }
 
         internal BfshaFileSwitchSaver(IResData resData, BfshaFile resFile, Stream stream, bool leaveOpen)
     : base(resData, resFile, stream, leaveOpen)
         {
-            ByteOrder = ByteOrder.LittleEndian;
+            ByteConverter = ByteConverter.Little;
         }
 
         /// <summary>
@@ -70,14 +70,14 @@ namespace BfshaLibrary.Switch.Core
         internal BfshaFileSwitchSaver(BnshFile resFile, Stream stream, bool leaveOpen)
 : base(null, stream, leaveOpen)
         {
-            ByteOrder = ByteOrder.LittleEndian;
+            ByteConverter = ByteConverter.Little;
             BnshFile = resFile;
         }
 
         internal BfshaFileSwitchSaver(BnshFile resFile, string fileName)
 : base(null, fileName)
         {
-            ByteOrder = ByteOrder.LittleEndian;
+            ByteConverter = ByteConverter.Little;
             BnshFile = resFile;
         }
 

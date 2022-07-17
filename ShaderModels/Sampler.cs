@@ -29,14 +29,14 @@ namespace BfshaLibrary
             if (loader.IsSwitch)
             {
                 AltAnnotation = loader.LoadString();
-                Index = loader.ReadByte();
+                Index = (byte)loader.ReadByte();
                 loader.Seek(7);
             }
             else
             {
-                Index = loader.ReadByte();
-                GX2Type = loader.ReadByte(); //type
-                GX2Count = loader.ReadByte(); //array
+                Index = (byte)loader.ReadByte();
+                GX2Type = (byte)loader.ReadByte(); //type
+                GX2Count = (byte)loader.ReadByte(); //array
                 loader.ReadByte();//padding
                 AltAnnotation = loader.LoadString();
             }

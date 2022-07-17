@@ -16,9 +16,9 @@ namespace BfshaLibrary.Switch
             uint padding = loader.ReadUInt32();
             resFile.Version = loader.ReadUInt32();
             resFile.SetVersionInfo(resFile.Version);
-            resFile.ByteOrder = loader.ReadByteOrder();
-            resFile.Alignment = loader.ReadByte();
-            resFile.TargetAddressSize = loader.ReadByte(); //Thanks MasterF0X for pointing out the layout of the these
+            resFile.ByteConverter = loader.ReadByteConverter();
+            resFile.Alignment = (uint)loader.ReadByte();
+            resFile.TargetAddressSize = (uint)loader.ReadByte(); //Thanks MasterF0X for pointing out the layout of the these
             uint OffsetToFileName = loader.ReadUInt32();
             resFile.Flag = loader.ReadUInt16();
             resFile.BlockOffset = loader.ReadUInt16();
@@ -51,7 +51,7 @@ namespace BfshaLibrary.Switch
             saver.WriteSignature("FSHA");
             saver.Write(0x20202020);
             saver.Write(resFile.Version);
-            saver.WriteByteOrder(resFile.ByteOrder);
+            saver.WriteByteConverter(resFile.ByteConverter);
             saver.Write((byte)resFile.Alignment);
             saver.Write((byte)resFile.TargetAddressSize);
         }

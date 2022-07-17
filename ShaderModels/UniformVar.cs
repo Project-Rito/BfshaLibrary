@@ -34,17 +34,17 @@ namespace BfshaLibrary
                 Name = loader.LoadString();
                 Index = loader.ReadInt32();
                 Offset = loader.ReadUInt16();
-                BlockIndex = loader.ReadByte();
-                byte padding = loader.ReadByte();
+                BlockIndex = (byte)loader.ReadByte();
+                byte padding = (byte)loader.ReadByte();
             }
             else
             {
                 Index = loader.ReadInt32();
                 GX2Count = loader.ReadUInt16();
-                GX2Type = loader.ReadByte();
-                BlockIndex = loader.ReadByte();
+                GX2Type = (byte)loader.ReadByte();
+                BlockIndex = (byte)loader.ReadByte();
                 Offset = loader.ReadUInt16();
-                GX2ParamType = loader.ReadByte();
+                GX2ParamType = (byte)loader.ReadByte();
                 loader.ReadByte();
                 Name = loader.LoadString();
             }

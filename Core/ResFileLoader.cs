@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using Syroot.Maths;
 using Syroot.BinaryData;
+using Syroot.BinaryData.Core;
 
 namespace BfshaLibrary.Core
 {
     /// <summary>
     /// Loads the hierachy and data of a <see cref="Bfres.ResFile"/>.
     /// </summary>
-    public class BfshaFileLoader : BinaryDataReader
+    public class BfshaFileLoader : BinaryStream
     {
         // ---- FIELDS -------------------------------------------------------------------------------------------------
 
@@ -28,14 +29,14 @@ namespace BfshaLibrary.Core
         /// <param name="stream">The <see cref="Stream"/> to read data from.</param>
         /// <param name="leaveOpen"><c>true</c> to leave the stream open after reading, otherwise <c>false</c>.</param>
         internal BfshaFileLoader(BfshaFile resFile, Stream stream, bool leaveOpen = false)
-            : base(stream, Encoding.ASCII, true)
+            : base(stream, null, null, BooleanCoding.Byte, DateTimeCoding.NetTicks, StringCoding.ZeroTerminated, leaveOpen)
         {
             BfshaFile = resFile;
             _dataMap = new Dictionary<uint, IResData>();
         }
 
         internal BfshaFileLoader(IResData resData, BfshaFile resFile, Stream stream, bool leaveOpen = false)
-    : base(stream, Encoding.ASCII, leaveOpen)
+    : base(stream, null, null, BooleanCoding.Byte, DateTimeCoding.NetTicks, StringCoding.ZeroTerminated, leaveOpen)
         {
             BfshaFile = resFile;
             _dataMap = new Dictionary<uint, IResData>();
@@ -74,7 +75,7 @@ namespace BfshaLibrary.Core
         static internal void ImportSection(string fileName, IResData resData, BfshaFile resFile)
         {
             bool platformSwitch = false;
-            using (var reader = new BinaryDataReader(File.OpenRead(fileName))) {
+            using (var reader = new BinaryStream(File.OpenRead(fileName))) {
                 reader.Seek(24, SeekOrigin.Begin);
                 platformSwitch = reader.ReadUInt32() != 0;
             }
@@ -101,30 +102,32 @@ namespace BfshaLibrary.Core
 
         private void ReadImportedFileHeader()
         {
-            this.ByteOrder = ByteOrder.BigEndian;
+            this.ByteConverter = ByteConverter.Big;
 
             Seek(8, SeekOrigin.Begin); //SUB MAGIC
             BfshaFile.Version = ReadUInt32();
 
-            string sectionMagic = ReadString(8, Encoding.ASCII);
+            PushStringCoding(StringCoding.Raw);
+            string sectionMagic = ReadString(8);
+            PopStringCoding();
             uint offset = ReadUInt32();
             uint platformFlag = ReadUInt32();
             ReadUInt32();
-            this.ByteOrder = ByteOrder.BigEndian;
+            this.ByteConverter = ByteConverter.Big;
 
             if (platformFlag != 0)
             {
                 Seek(0x30, SeekOrigin.Begin);
-                this.ByteOrder = ByteOrder.LittleEndian;
+                this.ByteConverter = ByteConverter.Little;
             }
         }
 
-        internal ByteOrder ReadByteOrder()
+        internal ByteConverter ReadByteConverter()
         {
-            this.ByteOrder = ByteOrder.BigEndian;
-            var bom = ReadEnum<ByteOrder>(true);
-            this.ByteOrder = bom;
-            return bom;
+            this.ByteConverter = ByteConverter.Big;
+            var bom = ReadEnum<Syroot.BinaryData.Core.Endian>(true);
+            this.ByteConverter = ByteConverter.GetConverter(bom);
+            return this.ByteConverter;
         }
 
         /// <summary>
@@ -270,10 +273,10 @@ namespace BfshaLibrary.Core
             uint offset = ReadOffset();
             if (offset == 0) return null;
 
-            encoding = encoding ?? Encoding;
+            Encoding = encoding ?? Encoding;
             using (TemporarySeek(offset, SeekOrigin.Begin))
             {
-                return ReadString(encoding);
+                return ReadString(Encoding);
             }
         }
 
@@ -288,7 +291,7 @@ namespace BfshaLibrary.Core
         {
             uint[] offsets = ReadOffsets(count);
 
-            encoding = encoding ?? Encoding;
+            Encoding = encoding ?? Encoding;
             string[] names = new string[offsets.Length];
             using (TemporarySeek())
             {
@@ -298,7 +301,7 @@ namespace BfshaLibrary.Core
                     if (offset == 0) continue;
 
                     Position = offset;
-                    names[i] = ReadString(encoding);
+                    names[i] = ReadString(Encoding);
                 }
                 return names;
             }
@@ -350,7 +353,12 @@ namespace BfshaLibrary.Core
         public virtual uint ReadSize() => ReadUInt32();
 
         public virtual string ReadString(Encoding encoding = null) {
-            return ReadString(BinaryStringFormat.ZeroTerminated, encoding);
+            PushStringCoding(StringCoding.ZeroTerminated);
+            PushEncoding(encoding);
+            string output = base.ReadString();
+            PopEncoding();
+            PopStringCoding();
+            return output;
         }
 
         /// <summary>
@@ -361,7 +369,9 @@ namespace BfshaLibrary.Core
         internal void CheckSignature(string validSignature)
         {
             // Read the actual signature and compare it.
-            string signature = ReadString(sizeof(uint), Encoding.ASCII);
+            PushEncoding(Encoding.ASCII);
+            string signature = ReadString(sizeof(uint));
+            PopEncoding();
             if (signature != validSignature)
             {
                  System.Console.WriteLine($"Invalid signature, expected '{validSignature}' but got '{signature}' at position {Position}.");
@@ -395,8 +405,44 @@ namespace BfshaLibrary.Core
             return values;
         }
 
+        private Stack<StringCoding> _stringCodingStack = new Stack<StringCoding>();
+        /// <summary>
+        /// Pushes a string coding in a way that previous codings can be restored.
+        /// </summary>
+        /// <param name="coding">The coding to push.</param>
+        public void PushStringCoding(StringCoding coding)
+        {
+            _stringCodingStack.Push(StringCoding);
+            StringCoding = coding;
+        }
+        /// <summary>
+        /// Pops a string coding.
+        /// </summary>
+        public void PopStringCoding()
+        {
+            StringCoding = _stringCodingStack.Pop();
+        }
+
+        private Stack<Encoding> _encodingStack = new Stack<Encoding>();
+        /// <summary>
+        /// Pushes an encoding in a way that previous encodings can be restored.
+        /// </summary>
+        /// <param name="coding">The coding to push.</param>
+        public void PushEncoding(Encoding encoding)
+        {
+            _encodingStack.Push(Encoding);
+            Encoding = encoding;
+        }
+        /// <summary>
+        /// Pops an encoding.
+        /// </summary>
+        public void PopEncoding()
+        {
+            Encoding = _encodingStack.Pop();
+        }
+
         // ---- METHODS (PRIVATE) --------------------------------------------------------------------------------------
-        
+
         [DebuggerStepThrough]
         private T ReadResData<T>()
             where T : IResData, new()

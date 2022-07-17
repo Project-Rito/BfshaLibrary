@@ -77,13 +77,13 @@ namespace BfshaLibrary
                 Name = loader.LoadString();
                 ChoiceDict = loader.LoadDict<ResUint32>();
                 uint choiceValuesOffset = loader.ReadOffset();
-                byte choiceCount = loader.ReadByte();
-                defaultIndex = loader.ReadByte();
-                branchOffset = loader.ReadUInt16(); // Uniform block offset.
-                flag = loader.ReadByte();
-                keyOffset = loader.ReadByte();
-                bit32Index = loader.ReadByte();
-                bit32Shift = loader.ReadByte();
+                byte choiceCount = (byte)loader.ReadByte();
+                defaultIndex = (byte)loader.ReadByte();
+                branchOffset = (byte)loader.ReadUInt16(); // Uniform block offset.
+                flag = (byte)loader.ReadByte();
+                keyOffset = (byte)loader.ReadByte();
+                bit32Index = (byte)loader.ReadByte();
+                bit32Shift = (byte)loader.ReadByte();
                 bit32Mask = loader.ReadUInt32();
                 uint padding = loader.ReadUInt32();
 
@@ -94,13 +94,13 @@ namespace BfshaLibrary
             }
             else
             {
-                byte choiceCount = loader.ReadByte();
-                defaultIndex = loader.ReadByte();
-                branchOffset = loader.ReadUInt16(); // Uniform block offset.
-                flag = loader.ReadByte();
-                keyOffset = loader.ReadByte();
-                bit32Index = loader.ReadByte();
-                bit32Shift = loader.ReadByte();
+                byte choiceCount = (byte)loader.ReadByte();
+                defaultIndex = (byte)loader.ReadByte();
+                branchOffset = (byte)loader.ReadUInt16(); // Uniform block offset.
+                flag = (byte)loader.ReadByte();
+                keyOffset = (byte)loader.ReadByte();
+                bit32Index = (byte)loader.ReadByte();
+                bit32Shift = (byte)loader.ReadByte();
                 bit32Mask = loader.ReadUInt32();
                 Name = loader.LoadString();
                 ChoiceDict = loader.LoadDict<ResUint32>();

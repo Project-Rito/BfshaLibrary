@@ -34,7 +34,7 @@ namespace BfshaLibrary
             {
                 Uniforms = loader.LoadDictValues<UniformVar>();
                 long defaultOffset = loader.ReadInt64();
-                Index = loader.ReadByte();
+                Index = (byte)loader.ReadByte();
                 Type = loader.ReadEnum<BlockType>(true);
                 Size = loader.ReadUInt16();
                 ushort uniformCount = loader.ReadUInt16();
@@ -42,7 +42,7 @@ namespace BfshaLibrary
             }
             else
             {
-                Index = loader.ReadByte();
+                Index = (byte)loader.ReadByte();
                 Type = loader.ReadEnum<BlockType>(true);
                 Size = loader.ReadUInt16();
                 ushort uniformCount = loader.ReadUInt16();
@@ -61,7 +61,7 @@ namespace BfshaLibrary
             else
             {
                 saver.Write(Index);
-                saver.Write(Type, false);
+                saver.WriteEnum(Type, false);
                 saver.Write(Size);
                 saver.Write((ushort)Uniforms.Count);
                 saver.Write((ushort)0);

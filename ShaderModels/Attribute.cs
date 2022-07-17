@@ -26,13 +26,13 @@ namespace BfshaLibrary
 
         void IResData.Load(BfshaFileLoader loader)
         {
-            Index = loader.ReadByte();
+            Index = (byte)loader.ReadByte();
             if (!loader.IsSwitch)
             {
-                GX2Type = loader.ReadByte();
-                GX2Count = loader.ReadByte();
+                GX2Type = (byte)loader.ReadByte();
+                GX2Count = (byte)loader.ReadByte();
             }
-            Location = loader.ReadByte();
+            Location = (byte)loader.ReadByte();
         }
 
         void IResData.Save(BfshaFileSaver saver)

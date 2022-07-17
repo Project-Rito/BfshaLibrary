@@ -63,13 +63,13 @@ namespace BfshaLibrary.Switch
             shaderModel.StaticKeyLength = loader.ReadByte();
             shaderModel.DynamicKeyLength = loader.ReadByte();
 
-            byte attribCount = loader.ReadByte();
-            byte samplerCount = loader.ReadByte();
+            byte attribCount = (byte)loader.ReadByte();
+            byte samplerCount = (byte)loader.ReadByte();
 
             if (loader.BfshaFile.VersionMajor2 >= 8)
                 loader.ReadByte();
 
-            byte uniformBlockCount = loader.ReadByte();
+            byte uniformBlockCount = (byte)loader.ReadByte();
             loader.ReadByte();
             byte[] systemBlockIndices = loader.ReadBytes(4);
             if (loader.BfshaFile.VersionMajor2 >= 8)

@@ -30,13 +30,13 @@ namespace BfshaLibrary.WiiU.Core
         internal BfshaFileWiiULoader(BfshaFile resFile, Stream stream, bool leaveOpen = false)
             : base(resFile, stream, leaveOpen)
         {
-            ByteOrder = ByteOrder.BigEndian;
+            ByteConverter = ByteConverter.Big;
         }
 
         internal BfshaFileWiiULoader(IResData resData, BfshaFile resFile, Stream stream, bool leaveOpen = false)
     : base(resData, resFile, stream, leaveOpen)
         {
-            ByteOrder = ByteOrder.BigEndian;
+            ByteConverter = ByteConverter.Big;
         }
 
         /// <summary>
@@ -48,13 +48,13 @@ namespace BfshaLibrary.WiiU.Core
         internal BfshaFileWiiULoader(BfshaFile resFile, string fileName)
             : base(resFile, fileName)
         {
-            ByteOrder = ByteOrder.BigEndian;
+            ByteConverter = ByteConverter.Big;
         }
 
         internal BfshaFileWiiULoader(IResData resData, BfshaFile resFile, string fileName)
             : base(resData, resFile, fileName)
         {
-            ByteOrder = ByteOrder.BigEndian;
+            ByteConverter = ByteConverter.Big;
         }
 
         // ---- PROPERTIES ---------------------------------------------------------------------------------------------

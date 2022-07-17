@@ -180,7 +180,7 @@ namespace BfshaLibrary
         /// <summary>
         /// Gets the byte order in which data is stored. Must be the endianness of the target platform.
         /// </summary>
-        public ByteOrder ByteOrder { get; internal set; }
+        public Syroot.BinaryData.ByteConverter ByteConverter { get; internal set; }
 
         /// <summary>
         /// Gets or sets the stored <see cref="RelocationTable"/> (_RLT) instance.
@@ -251,9 +251,9 @@ namespace BfshaLibrary
 
         public static bool IsSwitchBinary(Stream stream)
         {
-            using (var reader = new BinaryDataReader(stream, true))
+            using (var reader = new BinaryStream(stream, null, null, BooleanCoding.Byte, DateTimeCoding.NetTicks, StringCoding.ZeroTerminated, true))
             {
-                reader.ByteOrder = ByteOrder.LittleEndian;
+                reader.ByteConverter = Syroot.BinaryData.ByteConverter.Little;
 
                 reader.Seek(4, SeekOrigin.Begin);
                 uint paddingCheck = reader.ReadUInt32();

@@ -4,6 +4,7 @@ using System.IO;
 using Syroot.BinaryData;
 using BfshaLibrary.Core;
 using System.ComponentModel;
+using Syroot.BinaryData.Core;
 
 namespace BfshaLibrary
 {
@@ -112,7 +113,7 @@ namespace BfshaLibrary
         /// <summary>
         /// Gets the byte order in which data is stored. Must be the endianness of the target platform.
         /// </summary>
-        public ByteOrder ByteOrder { get; private set; }
+        public Syroot.BinaryData.ByteConverter ByteConverter { get; private set; }
 
 
         /// <summary>
@@ -232,9 +233,9 @@ namespace BfshaLibrary
             loader.CheckSignature(_signature);
             uint padding = loader.ReadUInt32();
             SetVersionInfo(loader.ReadUInt32());
-            ByteOrder = loader.ReadEnum<ByteOrder>(false);
-            Alignment = loader.ReadByte();
-            TargetAddressSize = loader.ReadByte(); //Thanks MasterF0X for pointing out the layout of the these
+            ByteConverter = loader.ReadEnum<Endian>(false) == Endian.Little ? Syroot.BinaryData.ByteConverter.Little : Syroot.BinaryData.ByteConverter.Big;
+            Alignment = (uint)loader.ReadByte();
+            TargetAddressSize = (uint)loader.ReadByte(); //Thanks MasterF0X for pointing out the layout of the these
             uint OffsetToFileName = loader.ReadUInt32();
             ushort flag = loader.ReadUInt16();
             ushort blockOffset = loader.ReadUInt16();
@@ -246,7 +247,9 @@ namespace BfshaLibrary
             {
                 using (loader.TemporarySeek(OffsetToFileName, SeekOrigin.Begin))
                 {
-                    Name = loader.ReadString(BinaryStringFormat.ZeroTerminated);
+                    loader.PushStringCoding(StringCoding.ZeroTerminated);
+                    Name = loader.ReadString();
+                    loader.PopStringCoding();
                 }
             }
 
@@ -255,7 +258,7 @@ namespace BfshaLibrary
             loader.Seek(12); //Block header
             ApiType = loader.ReadUInt16();
             ApiVersion = loader.ReadUInt16();
-            TargetCode = loader.ReadByte();
+            TargetCode = (byte)loader.ReadByte();
             loader.Seek(3); //reserved
             CompilerVersion = loader.ReadUInt32();
             uint VariationCount = loader.ReadUInt32();
@@ -276,7 +279,8 @@ namespace BfshaLibrary
             saver.WriteSignature(_signature);
             saver.Write(0x20202020);
             saver.Write(Version);
-            saver.Write(ByteOrder, true);
+            saver.ByteConverter = ByteConverter;
+            saver.Write(true);
             saver.Write((byte)Alignment);
             saver.Write((byte)TargetAddressSize);
         //    saverNX.SaveFileNameString(Name);

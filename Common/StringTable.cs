@@ -23,7 +23,7 @@ namespace BfshaLibrary
             for (int i = 0; i < StringCount + 1; i++)
             {
                 ushort size = loader.ReadUInt16();
-                Strings.Add(loader.ReadString(BinaryStringFormat.ZeroTerminated));
+                Strings.Add(loader.ReadString(StringCoding.ZeroTerminated));
                 loader.Align(2);
             }
         }

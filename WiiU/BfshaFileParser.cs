@@ -12,7 +12,7 @@ namespace BfshaLibrary.WiiU
             loader.CheckSignature("FSHA");
             resFile.Version = loader.ReadUInt32();
             resFile.SetVersionInfo(resFile.Version);
-            resFile.ByteOrder = loader.ReadByteOrder();
+            resFile.ByteConverter = loader.ReadByteConverter();
             ushort headerSize = loader.ReadUInt16();
             uint sizFile = loader.ReadUInt32();
             resFile.Alignment = loader.ReadUInt32();

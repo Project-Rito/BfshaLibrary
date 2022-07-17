@@ -51,7 +51,7 @@ namespace BfshaLibrary
 
         void IResData.Load(BfshaFileLoader loader)
         {
-            Type = loader.ReadByte();
+            Type = (byte)loader.ReadByte();
             Format = loader.ReadEnum<ShaderFormat>(false);
             loader.Seek(2); //padding
             CompressionType = loader.ReadUInt32();
@@ -100,7 +100,7 @@ namespace BfshaLibrary
         void IResData.Save(BfshaFileSaver saver)
         {
             saver.Write(Type);
-            saver.Write(Format, false);
+            saver.WriteEnum(Format, false);
             saver.Write(new byte[2]); //padding
             saver.Write(CompressionType);
             PtrVertexShaderCodePos = saver.SaveOffset();
